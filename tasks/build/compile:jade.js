@@ -1,6 +1,6 @@
 module.exports = function(gulp, path, $) {
   return function(){
-    gulp.src(path.templates.src)
+    gulp.src(path.templates.src + path.templates.glob)
     .pipe($.jade({
       pretty: true
     }))

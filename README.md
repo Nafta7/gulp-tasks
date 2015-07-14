@@ -86,5 +86,8 @@ And finally:
 ```js
 gulp.task('build', build);
 gulp.task('deploy', build.concat(deploy));
-
 ```
+
+## License
+
+MIT

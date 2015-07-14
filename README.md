@@ -12,7 +12,7 @@
 
 ## Usage
 
-`gulp-tasks` require gulp, a hash of paths for each asset and another for plugins. Note that gulp-task already load the necessary plugins for each tasks so is not necessary to pass them, the only necessary is browserSync to allow livereload in the browser.
+`gulp-tasks` require gulp, a hash of paths for each asset and another for plugins. Note that `gulp-tasks` already load the required plugins for each task so is not necessary to pass them, with the exception of browserSync to allow livereload in the browser.
 
 ```js
 var gulpTasks = require('gulp-tasks');
@@ -20,8 +20,6 @@ var modules = gulpTasks(gulp, path, plugins);
 ```
 
 ## Example
-
- 
 
 ```js
 var gulp = require('gulp'),
@@ -40,15 +38,53 @@ var path = {
   templates: { src: 'views/', dest: 'www/', glob: '*.jade'  }
 };
 
-var tasks = gulpTasks(gulp, path, plugins);
+var modules = gulpTasks(gulp, path, plugins);
+```
+
+`gulpTasks` will return the following hash:
+
+```js
+{
+  'compile:js': [Function],
+  'compile:sass': [Function],
+  'compile:jade': [Function],
+  build: {
+    'compile:js': Function],
+    'compile_sass': [Function],
+    'compile_jade': [Function]
+  },
+  'minify:css': [Function],
+  'minify:js': [Function],
+  deploy: {
+    'minify:css': [Function],
+    'minify:js': [Function]
+  }
+}
+```
+
+Which gives you the ability to access any module by simply writing
+`modules[name]` or choosing grouped tasks using `modules.build` and
+`modules.deploy`. 
+
+Task creation is entirely up to you, what gulpTasks provides is a
+collection of common tasks as true modules.
+
+Now for example, if we were to create a gulp task for each one of the
+modules, we could do the folowing:
+
+```js
 var build  = _.keys(_.forIn(tasks.build,  createTask));
 var deploy = _.keys(_.forIn(tasks.deploy, createTask));
-
-gulp.task('build', build);
-gulp.task('deploy', build.concat(deploy));
 
 function createTask(func, name){
   gulp.task(name, func);
 }
+```
+
+And finally:
+
+```js
+gulp.task('build', build);
+gulp.task('deploy', build.concat(deploy));
 
 ```

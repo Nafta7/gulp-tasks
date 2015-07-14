@@ -14,7 +14,7 @@
 
 `gulp-tasks` require gulp, a hash of paths for each asset and another for plugins. Note that gulp-task already load the necessary plugins for each tasks so is not necessary to pass them, the only necessary is browserSync to allow livereload in the browser.
 
-```
+```js
 var gulpTasks = require('gulp-tasks');
 var modules = gulpTasks(gulp, path, plugins); 
 ```
@@ -23,7 +23,7 @@ var modules = gulpTasks(gulp, path, plugins);
 
  
 
-```
+```js
 var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     gulpTasks = require('gulp-tasks'),

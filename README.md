@@ -1,4 +1,4 @@
-# gulp-tasks
+# gutaska
 
 > A collection of common gulp tasks-as-modules.
 
@@ -12,10 +12,10 @@
 
 ## Usage
 
-`gulp-tasks` require gulp, a hash of paths for each asset and another for plugins. Note that `gulp-tasks` already load the required plugins for each task so is not necessary to pass them, with the exception of browserSync to allow livereload in the browser.
+`gutaska` require gulp, a hash of paths for each asset and another for plugins. Note that `gutaska` already load the required plugins for each task so is not necessary to pass them, with the exception of browserSync to allow livereload in the browser.
 
 ```js
-var gulpTasks = require('gulp-tasks');
+var gutaska = require('gutaska');
 var modules = gulpTasks(gulp, path, plugins); 
 ```
 
@@ -24,7 +24,7 @@ var modules = gulpTasks(gulp, path, plugins);
 ```js
 var gulp = require('gulp'),
     browserSync = require('browser-sync'),
-    gulpTasks = require('gulp-tasks'),
+    gulpTasks = require('gutaska'),
     _         = require('lodash');
 
 var plugins = { browserSync: browserSync };
@@ -38,10 +38,10 @@ var path = {
   templates: { src: 'views/', dest: 'www/', glob: '*.jade'  }
 };
 
-var modules = gulpTasks(gulp, path, plugins);
+var modules = gutaska(gulp, path, plugins);
 ```
 
-`gulpTasks` will return the following hash:
+`gutaska` will return the following hash:
 
 ```js
 {

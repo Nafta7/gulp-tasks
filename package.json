@@ -1,5 +1,5 @@
 {
-  "name": "gulp_tasks",
+  "name": "gutaska",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nafta7/gulp-tasks.git"
+    "url": "git+https://github.com/Nafta7/gutaska.git"
   },
   "author": "Nafta <naftasan@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Nafta7/gulp-tasks/issues"
+    "url": "https://github.com/Nafta7/gutaska/issues"
   },
-  "homepage": "https://github.com/Nafta7/gulp-tasks#readme",
+  "homepage": "https://github.com/Nafta7/gutaska#readme",
   "dependencies": {
     "browserify": "^10.2.6",
     "gulp": "^3.9.0",

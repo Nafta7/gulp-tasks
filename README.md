@@ -66,7 +66,7 @@ Which gives you the ability to access any module by simply writing
 `modules[name]` or choosing grouped tasks using `modules.build` and
 `modules.deploy`. 
 
-Task creation is entirely up to you, what gulpTasks provides is a
+Task creation is entirely up to you, what gutaska provides is a
 collection of common tasks as true modules.
 
 Now for example, if we were to create a gulp task for each one of the

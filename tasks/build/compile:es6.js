@@ -5,11 +5,12 @@ var browserify = require('browserify'),
     tap = require('gulp-tap'),
     buffer = require('gulp-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
-    path = require('path')
+    path = require('path'),
+    babelify = require('babelify')
 
 
 module.exports = function(gulp, paths, $){
-  return function compile_js(cb){
+  return function compile_js_es6(cb){
     var bsync = $.browserSync ? $.browserSync.stream : $.gutil.noop
     var files = paths.scripts.glob || '*'
     files += '.js'
@@ -21,7 +22,11 @@ module.exports = function(gulp, paths, $){
         .pipe(tap(function (file) {
           $.gutil.log('Bundling scripts from: ' + file.path);
           // replace file contents with browserify's bundle stream
-          file.contents = browserify(file.path, {debug: true}).bundle();
+          file.contents = browserify(file.path, {debug: true})
+          .transform(babelify, {
+            presets: ['es2015']
+          })
+          .bundle()
         }))
 
         // transform streaming contents into buffer contents (because gulp-sourcemaps does not support streaming contents)

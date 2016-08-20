@@ -1,10 +1,11 @@
-module.exports = function(gulp, path, $){
-  return function(){
-    gulp.src(path.scripts.src + '**/*.js')
-    .pipe($.concat('all.js'))
-    .pipe(gulp.dest(path.scripts.dest))
-    .pipe($.rename('all.min.js'))
+module.exports = function(gulp, paths, $){
+  return function minify_js(cb){
+    $.gutil.log('Minifying js from: ' +  $.path.resolve(paths.scripts.dest))
+    var files = paths.scripts.glob || '**/*'
+    files += '.js'
+    gulp.src($.path.join(paths.scripts.dest, files))
     .pipe($.uglify())
-    .pipe(gulp.dest(path.scripts.dest));
+    .pipe(gulp.dest(paths.scripts.dist))
+    cb()
   };
 }

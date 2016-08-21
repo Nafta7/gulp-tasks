@@ -43,7 +43,7 @@ You should use **paths** to define the location of your assets, where are the **
 ```js
 var gulp = require('gulp');
 
-var path = {
+var paths = {
   styles: {
     src: 'src/sass',  
     dest: 'dest/sass',
@@ -72,7 +72,7 @@ tasks = require('gutaska')(gulp, paths)
 ```
 ## Gulp tasks
 
-`gutaska` automatically creates all the single tasks that are available, you can check this running the command:
+`gutaska` automatically creates all the single tasks that are available, you can check running the command:
 
 ```bash
 gulp --tasks

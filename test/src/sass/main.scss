@@ -1,25 +1,53 @@
-.a {
-  display: inline-block;
-  b {
-    text-align: left;
-    &:hover {
-      text-decoration: line-through;
-    }
-  }
-}
-$color-hue: 240;
-$color-sat: 70;
-$color-lum: 50;
+$hsl-base-hue: 240;
+$hsl-base-sat: 70;
+$hsl-base-lum: 50;
+
+$color-base: hsl($hsl-base-hue, $hsl-base-sat, $hsl-base-lum);
+
+$color-analog: hsl(($hsl-base-hue + 180), $hsl-base-sat, $hsl-base-lum);
+
+$color-med: hsl(($hsl-base-hue + 90), $hsl-base-sat, $hsl-base-lum);
 
 body {
-  background-color: hsl($color-hue, $color-sat, $color-lum);
-  color: hsl(($color-hue + 180), $color-sat, $color-lum);
-  font-size: 2em;
-  margin: 100px auto;
-  max-width: 700px;
+  background-color: $color-base;
+  color: $color-analog;
+  font-size: 1.5em;
 }
 
 h1 {
   text-transform: uppercase;
   font-size: 2em;
+}
+
+blockquote {
+  border-left: 5px solid $color-analog;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+  padding: 40px;
+  background: hsl($hsl-base-hue, $hsl-base-sat, 35);
+}
+
+a {
+  margin: 10px 0;
+  float: right;
+  display: inline-block;
+  color: $color-analog;
+  padding: 20px;
+  text-decoration: none;
+  border: 1px solid $color-analog;
+  &:visited, &:active {
+    color: $color-analog;
+  }
+  &:hover {
+    background-color: $color-analog;
+    border-color: $color-base;
+    color: $color-base;
+  }
+}
+
+.container {
+  margin: 10px auto;
+  padding: 0 40px;
+  max-width: 700px;
 }

@@ -18,7 +18,6 @@ function taskify(gulp, paths, p, opts){
   _.forOwn(modules, function(value, key){
     if (_.isFunction(value)){
       createTask(value, key)
-      obj[key] = key
     }
     else if (_.isObject(value)) {
       obj[key] = _.keys(value)

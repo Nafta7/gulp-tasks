@@ -15,7 +15,7 @@ if (es6) {
   scripts =  {
     src: 'src/es6',
     dest: 'dest/js',
-    dist: 'dest/dist/js',
+    dist: 'dist/js',
     glob: '*'
   }
 }
@@ -23,7 +23,7 @@ else {
   scripts = {
     src: 'src/es5',
     dest: 'dest/js',
-    dist: 'dest/dist/js',
+    dist: 'dist/js',
     glob: '*'
   }
 }
@@ -46,7 +46,8 @@ var paths = {
   vendor: {
     scripts: {
       src: 'vendor/js',
-      dest: 'dist/vendor'
+      dest: 'dest/vendor',
+      dist: 'dist/js'
     }
   },
 }
@@ -55,8 +56,6 @@ var tasks = require('../index.js')(gulp, paths, $)
 
 gulp.task('build', gulp.series('clean', gulp.parallel(tasks.build)))
 gulp.task('deploy', gulp.parallel(tasks.deploy))
-
-
 
 gulp.task('browser-sync', function(){
   browserSync.init({

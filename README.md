@@ -4,6 +4,7 @@
 
 ## Available tasks
 
+```
 tasks
 ├── build
 │    ├── compile:js
@@ -15,7 +16,7 @@ tasks
 │    └── minify:js.js
 └── setup
      └── clean
-
+```
 ## Install
 
 For now use the github repo to install `gutaska`, once I feel satisfied with the project, if ever, I will submit it to the npm registry.

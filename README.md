@@ -1,92 +1,127 @@
 # gutaska
 
-> A collection of common gulp tasks-as-modules.
+> A collection of common gulp tasks.
 
-## Available modules
+## Available tasks
 
- - (build/)compile:js
- - (build/)compile:sass
- - (build/)compile:jade
- - (deploy/)minify:js
- - (deploy/)minify:css
+tasks
+├── build
+│    ├── compile:js
+│    ├── compile:vendor:js
+│    ├── compile:jade
+│    └── compile:sass
+└── deploy
+│    ├── minify:css.js
+│    └── minify:js.js
+└── setup
+     └── clean
+
+## Install
+
+For now use the github repo to install `gutaska`, once I feel satisfied with the project, if ever, I will submit it to the npm registry.
+
+````bash
+npm install https://github.com/Nafta7/gutaska.git --save
+```
 
 ## Usage
 
-`gutaska` require gulp, a hash of paths for each asset and another for plugins. Note that `gutaska` already load the required plugins for each task so is not necessary to pass them, with the exception of browserSync to allow livereload in the browser.
+`gutaska` requires **gulp**, and a hash of **paths**. Note that `gutaska` already loads
+the required plugins for each task so is not necessary to pass them.
 
 ```js
-var gutaska = require('gutaska');
-var modules = gulpTasks(gulp, path, plugins); 
+var tasks = require('gutaska')(gulp, paths);
 ```
 
-## Example
+## Paths
+
+You should use **paths** to define the location of your assets, where are the **sass** files located? Where it should be compiled to? See an example below.
+
+### Example
 
 ```js
-var gulp = require('gulp'),
-    browserSync = require('browser-sync'),
-    gulpTasks = require('gutaska'),
-    _         = require('lodash');
-
-var plugins = { browserSync: browserSync };
+var gulp = require('gulp');
 
 var path = {
-  styles  : { src: 'styles/',  dest: 'www/styles/' },
-  scripts : { src: 'scripts/', dest: 'www/scripts/', boot: 'app.js' },
-  vendor: {
-    scripts: { src: 'vendor/', dest: 'www/scripts/' }
+  styles: {
+    src: 'src/sass',  
+    dest: 'dest/sass',
+    dist: 'dist'
   },
-  templates: { src: 'views/', dest: 'www/', glob: '*.jade'  }
-};
+  scripts: {
+    src: 'src/js',
+    dest: 'dest/scripts',
+    dist: 'dist'
+  },
+  templates: {
+    src: 'src/jade',
+    dest: 'dest/',
+  },
+  vendor: {
+    scripts: {
+      src: 'vendor/scripts',
+      dest: 'dest/js',
+      dist: 'dist'
+    }
+  }
+}
 
-var modules = gutaska(gulp, path, plugins);
+tasks = require('gutaska')(gulp, paths)
+
+```
+## Gulp tasks
+
+`gutaska` automatically creates all the single tasks that are available, you can check this running the command:
+
+```bash
+gulp --tasks
 ```
 
-`gutaska` will return the following hash:
+It should look something like this:
+```bash
+├── clean
+├── compile:jade
+├── compile:js
+├── compile:sass
+├── compile:vendor:js
+├── minify:css
+└── minify:js
+```
+
+Which means you can execute any of the tasks from the terminal. But what about the variable `tasks`? It looks to be receiving something from our module.
+
+Indeed. `gutaska` will return the following:
 
 ```js
 {
-  'compile:js': [Function],
-  'compile:sass': [Function],
-  'compile:jade': [Function],
-  build: {
-    'compile:js': Function],
-    'compile_sass': [Function],
-    'compile_jade': [Function]
-  },
-  'minify:css': [Function],
-  'minify:js': [Function],
-  deploy: {
-    'minify:css': [Function],
-    'minify:js': [Function]
-  }
+  build: [
+    'compile:jade',
+    'compile:js',
+    'compile:sass',
+    'compile:vendor:js'
+  ],
+  deploy: [
+    'minify:css',
+    'minify:js'
+  ],
+  setup: ['clean']  
 }
 ```
 
-Which gives you the ability to access any module by simply writing
-`modules[name]` or choosing grouped tasks using `modules.build` and
-`modules.deploy`. 
+Which gives you the ability to access grouped tasks in arrays that can be performed independent of another.
 
-Task creation is entirely up to you, what gutaska provides is a
-collection of common tasks as true modules.
+## Parallel tasks
 
-Now for example, if we were to create a gulp task for each one of the
-modules, we could do the folowing:
+As we have an array of tasks that can be performed in parallel we can do something like this:
 
 ```js
-var build  = _.keys(_.forIn(tasks.build,  createTask));
-var deploy = _.keys(_.forIn(tasks.deploy, createTask));
-
-function createTask(func, name){
-  gulp.task(name, func);
-}
+gulp.task('build', gulp.series('clean', gulp.parallel(tasks.build)))
+gulp.task('deploy', gulp.parallel(tasks.deploy))
 ```
 
-And finally:
+## Serial & parallel tasks
 
-```js
-gulp.task('build', build);
-gulp.task('deploy', build.concat(deploy));
-```
+Unfortunately I wasn't able to combine sequential tasks using the current alpha version of Gulp 4, but I will be looking into it.
 
 ## License
 

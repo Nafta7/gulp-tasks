@@ -4,14 +4,16 @@ html(lang="en")
     title= pageTitle
     script(type='text/javascript' src="js/gallery.js")
     link(rel="stylesheet" type="text/css" href="css/main.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-    h1 Pug - node template engine
-    h4 This is SNAAAAAAAAAAAAAAAAKEE
-    #container.col
-      if youAreUsingPug
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Pug is a terse and simple templating language with a
-        strong focus on performance and powerful features.
+    .container
+      h1 Megaman
+      blockquote "I hate Mega Man. He ruins everything." - Doctor Wily
+      p Mega Man, known as Rockman (Japanese: ロックマン Hepburn: Rokkuman?) 
+        | in Japan, is the title character and the protagonist of the Mega Man
+        | series by Capcom. The character was created by Akira Kitamura 
+        | for the first Mega Man game released in 1987, with artist 
+        | Keiji Inafune providing detailed character artwork based on
+        | Kitamura's pixel art design.
+      p
+        a(href="https://en.wikipedia.org/wiki/Mega_Man_(character)") Source

@@ -22,7 +22,6 @@
     "browserify": "^10.2.6",
     "del": "^2.2.2",
     "glob": "^7.0.5",
-    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-augments": "git://github.com/Nafta7/gulp-augments.git",
     "gulp-buffer": "0.0.2",
     "gulp-concat": "^2.6.0",
@@ -44,6 +43,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "gulp": "github:gulpjs/gulp#4.0"
   }
 }

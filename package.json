@@ -35,7 +35,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.7",
     "lodash": "^3.10.1",
-    "modula-loader": "^0.2.2",
+    "modula-loader": "^0.3.0",
     "path": "^0.12.7",
     "uglify": "^0.1.5",
     "vinyl-buffer": "^1.0.0",

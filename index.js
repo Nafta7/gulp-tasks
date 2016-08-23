@@ -8,12 +8,26 @@ plugins.minifycss = require('gulp-minify-css')
 plugins.path = require('path')
 plugins.gutil = require('gulp-util')
 
-function taskify(gulp, paths, p, opts){
-  opts = opts || {es6: true}
+function taskify(config){
+  var opts = config.opts || {}
+  var args = config.args || {}
+  opts.es6 = opts.es6 === undefined ? true : opts.es6
+  opts.exclude = opts.exclude || []
 
-  var $ = _.merge(plugins, p);
-  var modules = modula('tasks', { gulp: gulp, paths: paths, $: $ });
-  modules = filter(modules, opts)
+  opts.exclude = (opts.es6)
+    ? opts.exclude.concat(['compile:es5'])
+    : opts.exclude.concat(['compile:es6'])
+
+  args.plugins = _.merge(plugins, args.plugins);
+  var modules = modula('tasks', {
+    args: args,
+    opts: {
+      include: opts.include,
+      exclude: opts.exclude,
+      flat: opts.flat
+    }
+  })
+
   var obj = {}
   _.forOwn(modules, function(value, key){
     if (_.isFunction(value)){
@@ -31,20 +45,6 @@ function taskify(gulp, paths, p, opts){
       func(done)
     })
   }
-}
-
-function filter(modules, opts){
-  if (opts.es6) {
-    modules['compile:js'] = modules['compile:es6']
-    modules.build['compile:js'] = modules['compile:es6']
-    delete modules['compile:es6']
-    delete modules.build['compile:es6']
-  }
-  else {
-    delete modules['compile:es6']
-    delete modules.build['compile:es6']
-  }
-  return modules
 }
 
 module.exports = taskify

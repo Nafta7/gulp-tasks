@@ -7,7 +7,8 @@
 ```
 tasks
 ├── build
-│    ├── compile:js
+│    ├── compile:es5
+│    ├── compile:es6
 │    ├── compile:vendor:js
 │    ├── compile:jade
 │    └── compile:sass
@@ -19,7 +20,9 @@ tasks
 ```
 ## Install
 
-For now use the github repo to install `gutaska`, once I feel satisfied with the project, if ever, I will submit it to the npm registry.
+For now use the github repo to install `gutaska`,
+once I feel satisfied with the project, if ever,
+I will submit it to the npm registry.
 
 ````bash
 npm install https://github.com/Nafta7/gutaska.git --save
@@ -27,8 +30,7 @@ npm install https://github.com/Nafta7/gutaska.git --save
 
 ## Usage
 
-`gutaska` requires **gulp**, and a hash of **paths**. Note that `gutaska` already loads
-the required plugins for each task so is not necessary to pass them.
+`gutaska` requires **gulp**, and a hash of **paths**.
 
 ```js
 var tasks = require('gutaska')(gulp, paths);
@@ -36,7 +38,9 @@ var tasks = require('gutaska')(gulp, paths);
 
 ## Paths
 
-You should use **paths** to define the location of your assets, where are the **sass** files located? Where it should be compiled to? See an example below.
+You should use **paths** to define the location
+of your assets, where are the **sass** files located?
+Where it should be compiled to? See an example below.
 
 ### Example
 
@@ -72,7 +76,8 @@ tasks = require('gutaska')(gulp, paths)
 ```
 ## Gulp tasks
 
-`gutaska` automatically creates all the single tasks that are available, you can check running the command:
+`gutaska` automatically creates all the single tasks
+that are available, you can check running the command:
 
 ```bash
 gulp --tasks
@@ -89,7 +94,9 @@ It should look something like this:
 └── minify:js
 ```
 
-Which means you can execute any of the tasks from the terminal. But what about the variable `tasks`? It looks to be receiving something from our module.
+Which means you can execute any of the tasks from
+the terminal. But what about the variable `tasks`?
+It looks to be receiving something from our module.
 
 Indeed. `gutaska` will return the following:
 
@@ -109,11 +116,13 @@ Indeed. `gutaska` will return the following:
 }
 ```
 
-Which gives you the ability to access grouped tasks in arrays that can be performed independent of another.
+Which gives you the ability to access grouped tasks
+in arrays that can be performed independent of another.
 
 ## Parallel tasks
 
-As we have an array of tasks that can be performed in parallel we can do something like this:
+As we have an array of tasks that can be performed
+in parallel we can do something like this:
 
 ```js
 gulp.task('build', gulp.series('clean', gulp.parallel(tasks.build)))
@@ -122,7 +131,9 @@ gulp.task('deploy', gulp.parallel(tasks.deploy))
 
 ## Serial & parallel tasks
 
-Unfortunately I wasn't able to combine sequential tasks using the current alpha version of Gulp 4, but I will be looking into it.
+Unfortunately I wasn't able to combine sequential tasks
+using the current alpha version of Gulp 4,
+but I will be looking into it.
 
 ## License
 

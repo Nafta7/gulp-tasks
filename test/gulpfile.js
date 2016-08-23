@@ -52,7 +52,13 @@ var paths = {
   },
 }
 
-var tasks = require('../index.js')(gulp, paths, $)
+var tasks = require('../index.js')({
+  args: {
+    gulp: gulp,
+    paths: paths,
+    plugins: $
+  }
+})
 
 gulp.task('build', gulp.series('clean', gulp.parallel(tasks.build)))
 gulp.task('deploy', gulp.parallel(tasks.deploy))
@@ -74,9 +80,11 @@ gulp.task('watch', function(){
   gulp.watch(path.resolve(paths.styles.src, '**/*.scss'),
     gulp.series('compile:sass'))
   gulp.watch(path.resolve(paths.scripts.src, '**/*.js'),
-    gulp.series('compile:js'))
+    gulp.series('compile:es6'))
   gulp.watch(path.resolve(paths.templates.src, '**/*.jade'),
     gulp.series('compile:jade'))
 })
 
-gulp.task('serve', gulp.series('build', gulp.parallel('watch', 'browser-sync')))
+gulp.task('serve', gulp.series('build',
+  gulp.parallel('watch', 'browser-sync')
+))

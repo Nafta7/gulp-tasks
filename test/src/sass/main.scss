@@ -1,4 +1,4 @@
-$hsl-base-hue: 240;
+$hsl-base-hue: 225;
 $hsl-base-sat: 70;
 $hsl-base-lum: 50;
 
@@ -12,6 +12,7 @@ body {
   background-color: $color-base;
   color: $color-analog;
   font-size: 1.5em;
+  line-height: 1.5em;
 }
 
 h1 {

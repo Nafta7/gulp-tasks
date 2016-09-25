@@ -18,14 +18,12 @@ tasks
 └── setup
      └── clean
 ```
-## Install
+## Installation
 
-For now use the github repo to install `gutaska`,
-once I feel satisfied with the project, if ever,
-I will submit it to the npm registry.
+Install with npm.
 
 ````bash
-npm install https://github.com/Nafta7/gutaska.git --save
+npm install https://github.com/Nafta7/gutaska.git
 ```
 
 ## Usage

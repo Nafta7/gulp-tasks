@@ -1,13 +1,21 @@
 module.exports = function(gulp, paths, $){
   return function minify_css(cb){
     $.gutil.log('Minifying css from: ' + $.path.resolve(paths.styles.dest))
-    var files = paths.styles.glob || '**/*'
-    files += '.css'
-    gulp.src($.path.join(paths.styles.dest, files))
-    .pipe($.concat('all.css'))
-    .pipe($.rename('all.min.css'))
+    var ignore
+    var dest = paths.styles.dest
+    var match = paths.styles.glob || '**/*'
+    match += '.css'
+    match = $.path.join(dest, match)
+    ignore = '!' + '(' + $.path.join(dest, '*.min.css')
+    ignore += '|' + $.path.join(dest, '*.css.map')
+    ignore += ')'
+
+    gulp.src([match, ignore])
+    .pipe($.rename(function(path){
+      path.basename += '.min'
+    }))
     .pipe($.minifycss())
-    .pipe(gulp.dest(paths.styles.dist))
+    .pipe(gulp.dest(paths.styles.dest))
     cb()
-  };
+  }
 }

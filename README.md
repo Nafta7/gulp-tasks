@@ -50,23 +50,20 @@ var gulp = require('gulp');
 var paths = {
   styles: {
     src: 'src/sass',  
-    dest: 'dest/sass',
-    dist: 'dist'
+    dest: 'dest/sass'
   },
   scripts: {
     src: 'src/js',
-    dest: 'dest/scripts',
-    dist: 'dist'
+    dest: 'dest/scripts'
   },
   templates: {
     src: 'src/jade',
-    dest: 'dest/',
+    dest: 'dest/'
   },
   vendor: {
     scripts: {
       src: 'vendor/scripts',
-      dest: 'dest/js',
-      dist: 'dist'
+      dest: 'dest/js'
     }
   }
 }

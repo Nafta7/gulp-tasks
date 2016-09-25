@@ -14,42 +14,33 @@ var scripts
 if (es6) {
   scripts =  {
     src: 'src/es6',
-    dest: 'dest/js',
-    dist: 'dist/js',
-    glob: '*'
+    dest: 'dest/js'
   }
 }
 else {
   scripts = {
     src: 'src/es5',
-    dest: 'dest/js',
-    dist: 'dist/js',
-    glob: '*'
+    dest: 'dest/js'
   }
 }
 
 var paths = {
   dest: 'dest',
-  dist: 'dist',
   styles: {
     src: 'src/sass',
-    dest: 'dest/css',
-    dist: 'dist',
-    glob: '*'
+    dest: 'dest/css'
   },
   scripts: scripts,
   templates: {
     src:'src/jade',
-    dest: 'dest',
-    dist: 'dist'
+    dest: 'dest'
   },
   vendor: {
     scripts: {
       src: 'vendor/js',
-      dest: 'dest/vendor',
-      dist: 'dist/js'
+      dest: 'dest/vendor'
     }
-  },
+  }
 }
 
 var tasks = require('../index.js')({

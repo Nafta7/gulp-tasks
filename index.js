@@ -1,10 +1,9 @@
-var gulp    = require('gulp'),
-    modula  = require('modula-loader'),
+    var modula  = require('modula-loader'),
     _       = require('lodash'),
     plugins = require('gulp-load-plugins')()
 
 plugins.uglify = require('gulp-uglify')
-plugins.minifycss = require('gulp-minify-css')
+plugins.cleanCSS = require('gulp-clean-css')
 plugins.path = require('path')
 plugins.gutil = require('gulp-util')
 
@@ -31,20 +30,19 @@ function taskify(config){
   var obj = {}
   _.forOwn(modules, function(value, key){
     if (_.isFunction(value)){
-      createTask(value, key)
-    }
-    else if (_.isObject(value)) {
-      obj[key] = _.keys(value)
+      createTask(args.gulp, value, key)
     }
   })
 
-  return obj
+  return modules
 
-  function createTask(func, name){
-    gulp.task(name, function(done){
-      func(done)
-    })
-  }
+}
+
+function createTask(gulp, func, name){
+  gulp.task(name, function(done){
+    func()
+    done()
+  })
 }
 
 module.exports = taskify

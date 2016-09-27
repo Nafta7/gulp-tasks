@@ -51,8 +51,16 @@ var tasks = require('../index.js')({
   }
 })
 
-gulp.task('build', gulp.series('clean', gulp.parallel(tasks.build)))
-gulp.task('deploy', gulp.parallel(tasks.deploy))
+var buildTasks = Object.keys(tasks.build).map(function(key) {
+  return tasks.build[key]
+})
+
+var deployTasks = Object.keys(tasks.deploy).map(function(key){
+  return tasks.deploy[key]
+})
+
+gulp.task('build', gulp.series('clean', gulp.parallel(buildTasks)))
+gulp.task('deploy', gulp.series('clean', buildTasks, gulp.parallel(deployTasks)))
 
 gulp.task('browser-sync', function(){
   browserSync.init({
@@ -76,6 +84,6 @@ gulp.task('watch', function(){
     gulp.series('compile:jade'))
 })
 
-gulp.task('serve', gulp.series('build',
-  gulp.parallel('watch', 'browser-sync')
-))
+// gulp.task('serve', gulp.series('build',
+//   gulp.parallel('watch', 'browser-sync')
+// ))

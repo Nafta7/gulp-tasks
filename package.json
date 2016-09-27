@@ -24,10 +24,10 @@
     "glob": "^7.0.5",
     "gulp-augments": "git://github.com/Nafta7/gulp-augments.git",
     "gulp-buffer": "0.0.2",
+    "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.0",
     "gulp-jade": "^1.0.1",
     "gulp-load-plugins": "^0.10.0",
-    "gulp-minify-css": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.3",
     "gulp-sourcemaps": "^1.5.2",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",
-    "tape": "^4.6.0",
-    "gulp": "github:gulpjs/gulp#4.0"
+    "gulp": "github:gulpjs/gulp#4.0",
+    "tape": "^4.6.0"
   }
 }

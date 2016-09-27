@@ -1,5 +1,5 @@
 module.exports = function(gulp, paths, $){
-  return function minify_css(cb){
+  function minifyCSS(){
     $.gutil.log('Minifying css from: ' + $.path.resolve(paths.styles.dest))
     var ignore
     var dest = paths.styles.dest
@@ -10,12 +10,16 @@ module.exports = function(gulp, paths, $){
     ignore += '|' + $.path.join(dest, '*.css.map')
     ignore += ')'
 
-    gulp.src([match, ignore])
-    .pipe($.rename(function(path){
-      path.basename += '.min'
-    }))
-    .pipe($.minifycss())
-    .pipe(gulp.dest(paths.styles.dest))
-    cb()
+    var stream = gulp.src([match, ignore])
+      .pipe($.rename(function(path){
+        path.basename += '.min'
+      }))
+      .pipe($.cleanCSS())
+      .pipe(gulp.dest(paths.styles.dest))
+
+    return stream
   }
+
+  minifyCSS.displayName = 'minify:css'
+  return minifyCSS
 }

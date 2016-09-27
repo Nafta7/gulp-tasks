@@ -1,5 +1,5 @@
 module.exports = function(gulp, paths, $){
-  return function minify_js(cb){
+  function minifyJS(){
     $.gutil.log('Minifying js from: ' +  $.path.resolve(paths.scripts.dest))
     var ignore
     var dest = paths.scripts.dest
@@ -10,12 +10,16 @@ module.exports = function(gulp, paths, $){
     ignore += '|' + $.path.join(dest, '*.js.map')
     ignore += ')'
 
-    gulp.src([match, ignore])
-    .pipe($.rename(function(path){
-      path.basename += '.min'
-    }))
-    .pipe($.uglify())
-    .pipe(gulp.dest(paths.scripts.dest))
-    cb()
+    var stream = gulp.src([match, ignore])
+      .pipe($.rename(function(path){
+        path.basename += '.min'
+      }))
+      .pipe($.uglify())
+      .pipe(gulp.dest(paths.scripts.dest))
+
+    return stream
   }
+
+  minifyJS.displayName = 'minify:js'
+  return minifyJS
 }

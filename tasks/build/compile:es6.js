@@ -8,42 +8,36 @@ var browserify = require('browserify'),
     path = require('path'),
     babelify = require('babelify')
 
-
 module.exports = function(gulp, paths, $){
-  return function compile_js_es6(cb){
+  function compileJSES6(){
     var bsync = $.browserSync ? $.browserSync.stream : $.gutil.noop
     var files = paths.scripts.glob || '*'
     files += '.js'
-    gulp.src(path.join(paths.scripts.src, files), {
+    var stream = gulp.src(path.join(paths.scripts.src, files), {
       read: false,
       base: paths.scripts.src
     })
-        // transform file objects using gulp-tap plugin
-        .pipe(tap(function (file) {
-          $.gutil.log('Bundling scripts from: ' + file.path);
-          // replace file contents with browserify's bundle stream
-          file.contents = browserify(file.path, {debug: true})
-          .transform(babelify, {
-            presets: ['es2015']
-          })
-          .bundle()
-        }))
+      .pipe(tap(function (file) {
+        $.gutil.log('Bundling scripts from: ' + file.path);
+        file.contents = browserify(file.path, {debug: true})
+        .transform(babelify, {
+          presets: ['es2015']
+        })
+        .bundle()
+      }))
 
-        // transform streaming contents into buffer contents (because gulp-sourcemaps does not support streaming contents)
-        .pipe(buffer())
+      .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('./'))
 
-        // load and init sourcemaps
-        .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(gulp.dest(paths.scripts.dest))
+      .pipe(bsync())
 
-        // .pipe(uglify())
+    return stream
+  }
 
-        // write sourcemaps
-        .pipe(sourcemaps.write('./'))
-
-        .pipe(gulp.dest(paths.scripts.dest))
-        .pipe(bsync())
-        cb()
-  };
+  compileJSES6.displayName = 'compile:es6'
+  return compileJSES6
 }
 
 // Courtesy of gulpjs recipes

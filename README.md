@@ -126,9 +126,18 @@ gulp.task('deploy', gulp.parallel(tasks.deploy))
 
 ## Serial & parallel tasks
 
-Unfortunately I wasn't able to combine sequential tasks
-using the current alpha version of Gulp 4,
-but I will be looking into it.
+Totally possible now.
+Since `tasks` has access to all of the functions we can build
+and array like this and pass to `gulp.parallel` and/or `gulp-series`:
+
+```js
+let buildTasks = Object.keys(tasks.build).map(k => tasks.build[k])
+let deployTasks = Object.keys(tasks.deploy).map(k => tasks.deploy[k])
+
+gulp.task('build', gulp.series('clean', gulp.parallel(buildTasks)))
+gulp.task('deploy', gulp.series('clean', buildTasks, gulp.parallel(deployTasks)))
+
+```
 
 ## License
 

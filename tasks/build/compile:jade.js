@@ -1,9 +1,17 @@
 import jade from 'gulp-jade'
 
 module.exports = function(gulp, paths, $) {
-  function compileJade(){
+  function compileJade(cb){
+    if (!paths.templates) {
+      $.gutil.log(`[${compileJade.displayName}] Warning: `
+        + `task did not complete because template paths are not defined.`)
+      cb()
+      return
+    }
+
     let bsync = $.browserSync ? $.browserSync.stream : gutil.noop
-    $.gutil.log(`Compiling templates from: ${$.path.resolve(paths.templates.src)}`)
+    $.gutil.log(`[${compileJade.displayName}] `
+      + `Compiling templates from: ${paths.templates.src}`)
     let files = paths.templates.glob || '**/*'
     files += '.jade'
     var stream = gulp.src($.path.join(paths.templates.src, files))

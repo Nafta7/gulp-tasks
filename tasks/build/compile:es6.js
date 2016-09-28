@@ -5,7 +5,14 @@ import buffer from 'gulp-buffer'
 import babelify from 'babelify'
 
 module.exports = function(gulp, paths, $){
-  function compileJSES6(){
+  function compileJSES6(cb){
+    if (!paths.scripts) {
+      $.gutil.log(`[${compileJSES6.displayName}] Warning: `
+        + `task did not complete because script paths are not defined.`)
+      cb()
+      return
+    }
+
     var bsync = $.browserSync ? $.browserSync.stream : $.gutil.noop
     var files = paths.scripts.glob || '*'
     files += '.js'
@@ -14,7 +21,8 @@ module.exports = function(gulp, paths, $){
       base: paths.scripts.src
     })
       .pipe(tap(function (file) {
-        $.gutil.log('Bundling scripts from: ' + file.path);
+        $.gutil.log(`[${compileJSES6.displayName}] `
+          + `Bundling script: ${$.path.join(paths.scripts.src, file.relative)}`)
         file.contents = browserify(file.path, {debug: true})
         .transform(babelify, {
           presets: ['es2015']

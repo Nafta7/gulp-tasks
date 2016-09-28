@@ -2,8 +2,16 @@ import cleanCSS from 'gulp-clean-css'
 import rename from 'gulp-rename'
 
 module.exports = function(gulp, paths, $){
-  function minifyCSS(){
-    $.gutil.log(`Minifying css from: ${$.path.resolve(paths.styles.dest)}`)
+  function minifyCSS(cb){
+    if (!paths.styles) {
+      $.gutil.log(`[${compileSass.displayName}] Warning: `
+        + `task did not complete because style paths are not defined.`)
+      cb()
+      return
+    }
+
+    $.gutil.log(`[${minifyCSS.displayName}] `
+      + `Minifying css from: ${paths.styles.dest}`)
     let dest = paths.styles.dest
     let match = paths.styles.glob || '**/*'
     match += '.css'

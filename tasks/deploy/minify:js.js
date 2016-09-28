@@ -2,8 +2,16 @@ import uglify from 'gulp-uglify'
 import rename from 'gulp-rename'
 
 module.exports = function(gulp, paths, $){
-  function minifyJS(){
-    $.gutil.log(`Minifying js from: ${$.path.resolve(paths.scripts.dest)}`)
+  function minifyJS(cb){
+    if (!paths.scripts) {
+      $.gutil.log(`[${compileJSES6.displayName}] Warning: `
+        + `task did not complete because script paths are not defined.`)
+      cb()
+      return
+    }
+
+    $.gutil.log(`[${minifyJS.displayName}] `
+      + `Minifying js from: ${paths.scripts.dest}`)
     let dest = paths.scripts.dest
     let match = paths.scripts.glob || '**/*'
     match += '.js'

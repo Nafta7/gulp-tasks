@@ -1,9 +1,17 @@
 import concat from 'gulp-concat'
 
 module.exports = function(gulp, paths, $){
-  function compileVendorJS(){
+  function compileVendorJS(cb){
+    if (!paths.vendor)
+    {
+      $.gutil.log(`[${compileVendorJS.displayName}] Warning: `
+        + `task did not complete because vendor script paths are not defined.`)
+      cb()
+      return
+    }
     var bsync = $.browserSync ? $.browserSync.stream : gutil.noop
-    $.gutil.log('Compiling vendor scripts from: ' + $.path.resolve(paths.styles.src))
+    $.gutil.log(`[${compileVendorJS.displayName}] `
+      + `Compiling vendor scripts from: ${paths.vendor.scripts.src}`)
     var files = paths.vendor.scripts.glob || '**/*'
     files += '.js'
     var stream = gulp.src($.path.join(paths.vendor.scripts.src, files), {

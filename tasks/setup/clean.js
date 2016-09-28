@@ -2,11 +2,15 @@ var del = require('del')
 
 module.exports = function(gulp, paths, $) {
   function clean(){
-    $.gutil.log('Cleaning working folders...');
-    del($.path.join(paths.dest, '**/*'))
-    del($.path.join(paths.styles.dest, '**/*'))
-    del($.path.join(paths.scripts.dest, '**/*'))
-    del($.path.join(paths.templates.dest, '**/*'))
+    $.gutil.log(`[${clean.displayName}] Cleaning working folders.`);
+    if (paths && paths.dest)
+      del($.path.join(paths.dest, '**/*'))
+    if (paths.styles)
+      del($.path.join(paths.styles.dest, '**/*'))
+    if (paths.scripts)
+      del($.path.join(paths.scripts.dest, '**/*'))
+    if (paths.templates)
+      del($.path.join(paths.templates.dest, '**/*'))
   }
 
   clean.displayName = 'clean'

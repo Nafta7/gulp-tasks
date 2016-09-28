@@ -4,7 +4,14 @@ import tap from 'gulp-tap'
 import buffer from 'gulp-buffer'
 
 module.exports = function(gulp, paths, $){
-  function compileJSES5(){
+  function compileJSES5(cb){
+    if (!paths.scripts) {
+      $.gutil.log(`[${compileJSES5.displayName}] Warning: `
+        + `task did not complete because script paths are not defined.`)
+      cb()
+      return
+    }
+
     var bsync = $.browserSync ? $.browserSync.stream : $.gutil.noop
     var files = paths.scripts.glob || '*'
     files += '.js'
@@ -13,7 +20,8 @@ module.exports = function(gulp, paths, $){
       base: paths.scripts.src
     })
       .pipe(tap(function (file) {
-        $.gutil.log('Bundling scripts from: ' + file.path);
+        $.gutil.log(`[${compileJSES5.displayName}] `
+          + `Bundling script: ${$.path.join(paths.scripts.src, file.relative)}`)
         file.contents = browserify(file.path, {debug: true}).bundle();
       }))
       .pipe(buffer())

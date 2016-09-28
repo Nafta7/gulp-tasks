@@ -1,20 +1,22 @@
+import uglify from 'gulp-uglify'
+import rename from 'gulp-rename'
+
 module.exports = function(gulp, paths, $){
   function minifyJS(){
-    $.gutil.log('Minifying js from: ' +  $.path.resolve(paths.scripts.dest))
-    var ignore
-    var dest = paths.scripts.dest
-    var match = paths.scripts.glob || '**/*'
+    $.gutil.log(`Minifying js from: ${$.path.resolve(paths.scripts.dest)}`)
+    let dest = paths.scripts.dest
+    let match = paths.scripts.glob || '**/*'
     match += '.js'
     match = $.path.join(dest, match)
-    ignore = '!' + '(' + $.path.join(dest, '*.min.js')
-    ignore += '|' + $.path.join(dest, '*.js.map')
-    ignore += ')'
+    const pathJSMap = $.path.join(dest, '*.js.map')
+    const pathJSMin = $.path.join(dest, '*.min.js')
+    const ignore = `!(${pathJSMap}|${pathJSMin})`
 
     var stream = gulp.src([match, ignore])
-      .pipe($.rename(function(path){
+      .pipe(rename(function(path){
         path.basename += '.min'
       }))
-      .pipe($.uglify())
+      .pipe(uglify())
       .pipe(gulp.dest(paths.scripts.dest))
 
     return stream

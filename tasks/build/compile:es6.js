@@ -1,19 +1,15 @@
-var browserify = require('browserify'),
-    source = require('vinyl-source-stream'),
-    buffer = require('vinyl-buffer'),
-    gutil = require('gulp-util'),
-    tap = require('gulp-tap'),
-    buffer = require('gulp-buffer'),
-    sourcemaps = require('gulp-sourcemaps'),
-    path = require('path'),
-    babelify = require('babelify')
+import browserify from 'browserify'
+import source from 'vinyl-source-stream'
+import tap from 'gulp-tap'
+import buffer from 'gulp-buffer'
+import babelify from 'babelify'
 
 module.exports = function(gulp, paths, $){
   function compileJSES6(){
     var bsync = $.browserSync ? $.browserSync.stream : $.gutil.noop
     var files = paths.scripts.glob || '*'
     files += '.js'
-    var stream = gulp.src(path.join(paths.scripts.src, files), {
+    var stream = gulp.src($.path.join(paths.scripts.src, files), {
       read: false,
       base: paths.scripts.src
     })
@@ -27,8 +23,8 @@ module.exports = function(gulp, paths, $){
       }))
 
       .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(sourcemaps.write('./'))
+      .pipe($.sourcemaps.init({loadMaps: true}))
+      .pipe($.sourcemaps.write('./'))
 
       .pipe(gulp.dest(paths.scripts.dest))
       .pipe(bsync())

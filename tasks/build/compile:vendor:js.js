@@ -1,3 +1,5 @@
+import concat from 'gulp-concat'
+
 module.exports = function(gulp, paths, $){
   function compileVendorJS(){
     var bsync = $.browserSync ? $.browserSync.stream : gutil.noop
@@ -7,7 +9,7 @@ module.exports = function(gulp, paths, $){
     var stream = gulp.src($.path.join(paths.vendor.scripts.src, files), {
       base: paths.vendor.scripts.src
     })
-      .pipe($.concat('vendor.all.js'))
+      .pipe(concat('vendor.all.js'))
       .pipe(gulp.dest(paths.vendor.scripts.dest))
       .pipe(bsync())
 

@@ -97,38 +97,29 @@ Indeed. `gutaska` will return the following:
 
 ```js
 {
-  build: [
-    'compile:jade',
-    'compile:js',
-    'compile:sass',
-    'compile:vendor:js'
-  ],
-  deploy: [
-    'minify:css',
-    'minify:js'
-  ],
-  setup: ['clean']  
+  'compile:js': [Function],
+  'compile:sass': [Function],
+  build: {
+    'compile:js': Function],
+    'compile:sass': [Function]
+  },
+  'minify:css': [Function],
+  'minify:js': [Function],
+  deploy: {
+    'minify:css': [Function],
+    'minify:js': [Function]
+  },
+  setup: {
+    'clean': [Function]
+  }
 }
-```
-
-Which gives you the ability to access grouped tasks
-in arrays that can be performed independent of another.
-
-## Parallel tasks
-
-As we have an array of tasks that can be performed
-in parallel we can do something like this:
-
-```js
-gulp.task('build', gulp.series('clean', gulp.parallel(tasks.build)))
-gulp.task('deploy', gulp.parallel(tasks.deploy))
 ```
 
 ## Serial & parallel tasks
 
 Totally possible now.
 Since `tasks` has access to all of the functions we can build
-and array like this and pass to `gulp.parallel` and/or `gulp-series`:
+and array like the following and pass to `gulp.parallel` and/or `gulp-series`:
 
 ```js
 let buildTasks = Object.keys(tasks.build).map(k => tasks.build[k])

@@ -12,4 +12,4 @@ function loadPlugins(plugins) {
   return plugins
 }
 
-module.exports = loadPlugins
+export default loadPlugins

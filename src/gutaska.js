@@ -40,4 +40,4 @@ function createTask(gulp, func, name){
   })
 }
 
-export default taskify
+module.exports = taskify

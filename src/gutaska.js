@@ -14,8 +14,8 @@ function taskify(config){
   : opts.exclude.concat(['compile:es6'])
 
   args.plugins = Object.assign(plugins, args.plugins)
-  
-  var modules = modula('../tasks', {
+
+  var modules = modula('tasks', {
     args: args,
     opts: {
       include: opts.include,

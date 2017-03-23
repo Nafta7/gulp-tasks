@@ -22,7 +22,7 @@ tasks
 
 Install with npm.
 
-````bash
+```bash
 npm install https://github.com/Nafta7/gutaska.git
 ```
 

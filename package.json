@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nafta7/gutaska.git"
+    "url": "git+https://github.com/Nefla/gutaska.git"
   },
-  "author": "Nafta <naftasan@gmail.com>",
+  "author": "Nefla <neflasan@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Nafta7/gutaska/issues"
+    "url": "https://github.com/Nefla/gutaska/issues"
   },
-  "homepage": "https://github.com/Nafta7/gutaska#readme",
+  "homepage": "https://github.com/Nefla/gutaska#readme",
   "dependencies": {
     "babelify": "^7.3.0",
     "browserify": "^10.2.6",

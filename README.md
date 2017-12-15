@@ -23,7 +23,7 @@ tasks
 Install with npm.
 
 ```bash
-npm install https://github.com/Nafta7/gutaska.git
+npm install https://github.com/Nefla/gutaska.git
 ```
 
 ## Usage

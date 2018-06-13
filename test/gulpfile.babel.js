@@ -1,7 +1,6 @@
 import gulp from 'gulp'
-import path from 'path'
 import browserSync from 'browser-sync'
-import gutaska from '../lib/gutaska'
+import gutaska from '../src/gutaska'
 
 browserSync.create()
 

@@ -1,5 +1,5 @@
-import modula from 'modula-loader'
-import loadPlugins from './load-plugins'
+const modula = require('modula-loader')
+const loadPlugins = require('./load-plugins')
 
 let plugins = loadPlugins()
 

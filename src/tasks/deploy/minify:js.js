@@ -1,10 +1,10 @@
-import minify from 'gulp-babel-minify'
-import rename from 'gulp-rename'
+const minify = require('gulp-babel-minify')
+const rename = require('gulp-rename')
 
 module.exports = function(gulp, paths, $) {
   function minifyJs(cb) {
     if (!paths.scripts) {
-      $.gutil.log(
+      $.util.log(
         `[${minifyJs.displayName}] Warning: ` +
           `task did not complete because script paths are not defined.`
       )
@@ -12,9 +12,6 @@ module.exports = function(gulp, paths, $) {
       return
     }
 
-    $.gutil.log(
-      `[${minifyJs.displayName}] ` + `Minifying js from: ${paths.scripts.dest}`
-    )
     let dest = paths.scripts.dest
     let match = paths.scripts.glob || '**/*'
     match += '.js'

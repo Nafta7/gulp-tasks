@@ -1,15 +1,18 @@
-import path from 'path'
-import gutil from 'gulp-util'
-import sourcemaps from 'gulp-sourcemaps'
-import rename from 'gulp-rename'
+const log = require('fancy-log')
+const sourcemaps = require('gulp-sourcemaps')
+const rename = require('gulp-rename')
+const path = require('path')
+const noop = require('through2')
 
 function loadPlugins(plugins) {
   plugins = plugins || {}
   plugins.path = path
-  plugins.gutil = gutil
+  plugins.util = {}
+  plugins.util.log = log
+  plugins.util.noop = noop
   plugins.sourcemaps = sourcemaps
   plugins.rename = rename
   return plugins
 }
 
-export default loadPlugins
+module.exports = loadPlugins

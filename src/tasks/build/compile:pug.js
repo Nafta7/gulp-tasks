@@ -1,9 +1,9 @@
-import pug from 'gulp-pug'
+const pug = require('gulp-pug')
 
 module.exports = function(gulp, paths, $) {
   function compilePug(cb) {
     if (!paths.templates) {
-      $.gutil.log(
+      $.util.log(
         `[${compilePug.displayName}] Warning: ` +
           `task did not complete because template paths are not defined.`
       )
@@ -11,11 +11,7 @@ module.exports = function(gulp, paths, $) {
       return
     }
 
-    let bsync = $.browserSync ? $.browserSync.stream : gutil.noop
-    $.gutil.log(
-      `[${compilePug.displayName}] ` +
-        `Compiling templates from: ${paths.templates.src}`
-    )
+    let bsync = $.browserSync ? $.browserSync.stream : util.noop
     let files = paths.templates.glob || '**/*'
     files += '.pug'
     var stream = gulp

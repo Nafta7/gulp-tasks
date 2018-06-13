@@ -1,17 +1,16 @@
-import babel from 'gulp-babel'
+const babel = require('gulp-babel')
 
 module.exports = function(gulp, paths, $) {
   function compileBabel() {
     if (!paths.scripts) {
-      $.gutil.log(
+      $.util.log(
         `[${compileBabel.displayName}] Warning: ` +
           `task did not complete because script paths are not defined.`
       )
       cb()
       return
     }
-
-    const bsync = $.browserSync ? $.browserSync.stream : $.gutil.noop
+    const bsync = $.browserSync ? $.browserSync.stream : $.util.noop
     let files = paths.scripts.glob || '*'
     files += '.js'
 
